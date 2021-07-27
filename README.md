@@ -1,5 +1,7 @@
 # python-packaging-demo
 
+[![CI](https://github.com/jvendegna/python-packaging-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/jvendegna/python-packaging-demo/actions/workflows/ci.yml)
+
 Okay, so this is really a repo template... Or someday will be. 
 
 It strives to provide an opinionated take on what a good python project template would look like.
@@ -21,6 +23,11 @@ The CD (still working on it) action will build and release your package for you.
 
 Python packaging is an absolute nightmare. Everyone's opinioinated except PYPA who basically refuses to define "the right way". That's okay, we appreciate their guidance anyway. After deep diving the subject for about a week and building packages every possible way it could be done... I became opinionated. Poetry is the right tool for building and publishing python packages, if you're working with something else: I think you're doing it wrong. Doesn't mean you are. Just means I think you are probably spending way too much time thinking about it.
 
+## 🦋 Supporting
+
+Coffee and cookies... the small things make all the difference.
+
+<a href="https://www.buymeacoffee.com/jakevendegna" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/arial-yellow.png" alt="Buy Me A Coffee" width="217px" ></a> 
 
 ## See it in action, without the actions
 
