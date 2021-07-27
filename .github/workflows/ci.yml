@@ -53,4 +53,13 @@ jobs:
           poetry run coverage run -m pytest
 
       - name: Coverage Report
-        run: poetry run coverage report
+        run: |
+          poetry run coverage report
+          poetry run coverage report > cov.txt
+
+          # If coverage isn't 100%, fail.
+          if [tail -1 cov.txt | awk '{print $4}' != 100]
+          then
+            echo "Coverage Report Failed, Less than 100%"
+            exit 1
+          fi
