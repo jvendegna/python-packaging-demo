@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.1.6
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.virtualenvs
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ~/.virtualenvs
+          key: poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Dependencies
+        run: poetry install
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Code Quality
+        run: poetry run black . --check
+
+      - name: Lint
+        run: poetry run flake8 --ignore=E251,E226 --max-line-length=100
+
+      - name: Test
+        env: 
+          OP1FUN_EMAIL: ${{ secrets.OP1FUN_EMAIL }}
+          OP1FUN_TOKEN: ${{ secrets.OP1FUN_TOKEN }}
+        run: |
+          poetry run python op1fun/main.py get-user
+          poetry run coverage run -m pytest
+
+      - name: Coverage Report
+        run: |
+          poetry run coverage report
+          poetry run coverage report > cov.txt
+          # If coverage isn't 100%, fail.
+          if [[ $(tail -1 cov.txt | awk '{print $4}') != "100%" ]]
+          then
+            echo "Coverage Report Failed, Less than 100%"
+            exit 1
+          fi

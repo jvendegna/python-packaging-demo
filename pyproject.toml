@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "op1fun"
+version = "0.1.0"
+description = "\"Python Repo Template\""
+authors = ["Jakob Vendegna <me@jakobvendegna.dev>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+typer = "^0.3.2"
+requests = "^2.26.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+flake8 = "^3.9.2"
+black = "^21.7b0"
+coverage = {extras = ["toml"], version = "^5.5"}
+
+[tool.coverage.run]
+source = ["op1fun"]
+
+[tool.poetry.scripts]
+op1fun = 'op1fun.main:app'
+
+[flake8]
+max-line-length = 127
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
