@@ -1,4 +1,4 @@
-.PHONY: lint, test, clean
+.PHONY: lint, test, clean, setup, report, all
 
 lint:
 	poetry run flake8 --ignore=E251,E226 --max-line-length=100
@@ -15,3 +15,6 @@ report: test
 
 clean:
 	poetry run black -l 88 .
+
+
+all: setup clean lint report
