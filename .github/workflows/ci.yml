@@ -56,9 +56,9 @@ jobs:
         run: |
           poetry run coverage report
           poetry run coverage report > cov.txt
-
+          apt install -y tail awk
           # If coverage isn't 100%, fail.
-          if [tail -1 cov.txt | awk '{print $4}' != 100]
+          if [tail -1 cov.txt | awk '{print $4}' != "100%"]
           then
             echo "Coverage Report Failed, Less than 100%"
             exit 1
