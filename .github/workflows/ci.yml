@@ -45,6 +45,9 @@ jobs:
         run: poetry run flake8 --ignore=E251,E226 --max-line-length=100
 
       - name: Test
+        env: 
+          OP1FUN_EMAIL: ${{ secrets.OP1FUN_EMAIL }}
+          OP1FUN_TOKEN: ${{ secrets.OP1FUN_TOKEN }}
         run: poetry run coverage run -m pytest
 
       - name: Coverage Report
