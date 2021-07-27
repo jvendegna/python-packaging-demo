@@ -48,7 +48,9 @@ jobs:
         env: 
           OP1FUN_EMAIL: ${{ secrets.OP1FUN_EMAIL }}
           OP1FUN_TOKEN: ${{ secrets.OP1FUN_TOKEN }}
-        run: poetry run coverage run -m pytest
+        run: |
+          poetry run python op1fun/main.py get-user
+          poetry run coverage run -m pytest
 
       - name: Coverage Report
         run: poetry run coverage report
