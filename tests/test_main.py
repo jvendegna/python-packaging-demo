@@ -68,7 +68,7 @@ def test_download_pack():
         app, ["download-pack", "--username", "jaek", "--pack-id", "drums-36107"]
     )
     assert result.exit_code == 0
-    zip_path: Path = Path(str(os.getcwd() + "\\drums-36107.zip"))
+    zip_path: Path = Path(str(os.getcwd() + "/drums-36107.zip"))
     assert zip_path.is_file()
     os.remove(zip_path)
     assert not zip_path.is_file()
