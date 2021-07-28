@@ -1,4 +1,4 @@
-# Introduction
+# Contributing to python-packaging-demo
 
 ## Thanks!
 
